@@ -13,17 +13,20 @@ namespace UserAuthenticate
     public partial class ProfileForm3 : Form
     {
         public static string SetValueForText2 = "";
+
         public ProfileForm3()
         {
             InitializeComponent();
         }
+
         private void profileBtn_Click(object sender, EventArgs e)
         {
-            SetValueForText2 = userNamelabel.Text; 
+            SetValueForText2 = userNamelabel.Text;
             this.Hide();
             EditForm4 editForm = new EditForm4();
             editForm.Show();
         }
+
         private void logOutBtn_Click(object sender, EventArgs e)
         {
             this.Hide();

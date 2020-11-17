@@ -17,8 +17,9 @@ namespace UserAuthenticate
         {
             InitializeComponent();
         }
-        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\chase\OneDrive\문서\UserData.mdf;Integrated Security=True;Connect Timeout=30";
-
+        
+        private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\chase\OneDrive\문서\UserData.mdf;Integrated Security=True;Connect Timeout=30";
+        //private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDBFilename=|DataDirectory|UserData.mdf;Integrated Security = True;Connect Timeout=30";
         private void RegisterBtn_Click(object sender, EventArgs e)
         {
             if (isIdOverlap())
@@ -54,14 +55,14 @@ namespace UserAuthenticate
                 {
                     MessageBox.Show($"error !! {ex.Message}");
                 }
-
             }
-              
         }
+
         private void Clear()
         {
             joinTextBox_id.Text = joinTextBox_pw.Text = joinTextBox_pw2.Text = joinTextBox_name.Text = "";
         }
+
         private void placeHolder()
         {
             joinTextBox_id.Text = "아이디를 입력하세요";
@@ -71,10 +72,11 @@ namespace UserAuthenticate
             joinTextBox_pw.PasswordChar = '\0';
             joinTextBox_pw2.PasswordChar = '\0';
         }
+
         private bool isIdOverlap()
         {
-           string UserId;
-           string query = "Select UserId from [User] where UserId=@UserId";
+            string UserId;
+            string query = "Select UserId from [User] where UserId=@UserId";
             try
             {
                 SqlConnection sqlConnect = new SqlConnection(connectionString);
@@ -89,17 +91,18 @@ namespace UserAuthenticate
                         return true;
                 }
             }
-            catch(Exception er)
+            catch (Exception er)
             {
                 MessageBox.Show($"error!! : {er.Message}");
-            }                    
+            }
             return false;
         }
+
         private void joinTextBox_id_Enter(object sender, EventArgs e)
         {
             if (joinTextBox_id.Text == "아이디를 입력하세요")
                 joinTextBox_id.Text = "";
-            joinTextBox_id.ForeColor = Color.Black;            
+            joinTextBox_id.ForeColor = Color.Black;
         }
 
         private void joinTextBox_id_Leave(object sender, EventArgs e)
@@ -119,7 +122,7 @@ namespace UserAuthenticate
 
         private void joinTextBox_pw_Leave(object sender, EventArgs e)
         {
-            joinTextBox_pw.PasswordChar ='\0';
+            joinTextBox_pw.PasswordChar = '\0';
             joinTextBox_pw.ForeColor = Color.DarkGray;
 
             if (joinTextBox_pw.Text == "")
@@ -135,17 +138,18 @@ namespace UserAuthenticate
             joinTextBox_pw2.ForeColor = Color.Black;
             joinTextBox_pw2.PasswordChar = '●';
         }
+
         private void joinTextBox_pw2_Leave(object sender, EventArgs e)
         {
-            joinTextBox_pw2.PasswordChar ='\0';
+            joinTextBox_pw2.PasswordChar = '\0';
             joinTextBox_pw2.ForeColor = Color.DarkGray;
 
-            if (joinTextBox_pw2.Text == "" )
+            if (joinTextBox_pw2.Text == "")
                 joinTextBox_pw2.Text = "2차 비밀번호를 입력하세요";
             else
                 joinTextBox_pw2.PasswordChar = '●';
-
         }
+
         private void joinTextBox_name_Enter(object sender, EventArgs e)
         {
             if (joinTextBox_name.Text == "이름을 입력하세요")
@@ -162,65 +166,37 @@ namespace UserAuthenticate
 
         private void joinTextBox_id_KeyDown(object sender, KeyEventArgs e)
         {
-            try
+            if (e.KeyCode == Keys.Enter)
             {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    RegisterBtn_Click(sender, e);
-                    joinTextBox_id.Text = "";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"error!! : {ex.Message}");
+                RegisterBtn_Click(sender, e);
+                joinTextBox_id.Text = "";
             }
         }
 
         private void joinTextBox_pw_KeyDown(object sender, KeyEventArgs e)
         {
-            try
+            if (e.KeyCode == Keys.Enter)
             {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    RegisterBtn_Click(sender, e);
-                    joinTextBox_pw.Text = "";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"error!! : {ex.Message}");
+                RegisterBtn_Click(sender, e);
+                joinTextBox_pw.Text = "";
             }
         }
 
         private void joinTextBox_pw2_KeyDown(object sender, KeyEventArgs e)
         {
-            try
+            if (e.KeyCode == Keys.Enter)
             {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    RegisterBtn_Click(sender, e);
-                    joinTextBox_pw2.Text = "";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"error!! : {ex.Message}");
+                RegisterBtn_Click(sender, e);
+                joinTextBox_pw2.Text = "";
             }
         }
 
         private void joinTextBox_name_KeyDown(object sender, KeyEventArgs e)
         {
-            try
+            if (e.KeyCode == Keys.Enter)
             {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    RegisterBtn_Click(sender, e);
-                    joinTextBox_name.Text = "";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"error!! : {ex.Message}");
+                RegisterBtn_Click(sender, e);
+                joinTextBox_name.Text = "";
             }
         }
     }

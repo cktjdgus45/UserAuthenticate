@@ -14,12 +14,14 @@ namespace UserAuthenticate
     public partial class loginForm1 : Form
     {
         public static string SetValueForText = "";
+
         public loginForm1()
         {
             InitializeComponent();
         }
 
-        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\chase\OneDrive\문서\UserData.mdf;Integrated Security=True;Connect Timeout=30";
+        private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\chase\OneDrive\문서\UserData.mdf;Integrated Security=True;Connect Timeout=30";
+
         private void LoginBtn_Click(object sender, EventArgs e)
         {
             string query = "Select Count(*) from [User] where UserId='" + textBox_id.Text.Trim() + "' and Password='" + textBox_pw.Text.Trim() + "'";
@@ -45,19 +47,22 @@ namespace UserAuthenticate
                 MessageBox.Show($"error!! : {er.Message}");
             }
         }
+
         private void textBox_id_Enter(object sender, EventArgs e)
         {
             if (textBox_id.Text == "아이디를 입력하세요")
                 textBox_id.Text = "";
             textBox_id.ForeColor = Color.Black;
         }
+
         private void textBox_password_Enter_1(object sender, EventArgs e)
         {
             if (textBox_pw.Text == "비밀번호를 입력하세요")
                 textBox_pw.Text = "";
             textBox_pw.ForeColor = Color.Black;
-            textBox_pw.PasswordChar ='●';
+            textBox_pw.PasswordChar = '●';
         }
+
         private void showJoinBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -67,33 +72,19 @@ namespace UserAuthenticate
 
         private void textBox_pw_KeyDown(object sender, KeyEventArgs e)
         {
-            try
+            if (e.KeyCode == Keys.Enter)
             {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    LoginBtn_Click(sender, e);
-                    textBox_pw.Text = "";
-                }
+                LoginBtn_Click(sender, e);
+                textBox_pw.Text = "";
             }
-            catch(Exception ex)
-            {
-                MessageBox.Show($"error!! : {ex.Message}");
-            }            
         }
 
         private void textBox_id_KeyDown(object sender, KeyEventArgs e)
         {
-            try
+            if (e.KeyCode == Keys.Enter)
             {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    LoginBtn_Click(sender, e);
-                    textBox_id.Text = "";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"error!! : {ex.Message}");
+                LoginBtn_Click(sender, e);
+                textBox_id.Text = "";
             }
         }
     }
